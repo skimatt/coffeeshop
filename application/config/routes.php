@@ -52,3 +52,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+
+// Admin Routes
+$route['dashboard'] = 'admin/dashboard';
+$route['menu'] = 'admin/menu';
+$route['menu_tambah'] = 'admin/menu_tambah';
+$route['menu_edit/(:num)'] = 'admin/menu_edit/$1';
+$route['menu_hapus/(:num)'] = 'admin/menu_hapus/$1';
+
+// Cashier Routes
+$route['pemesanan_baru'] = 'kasir/pemesanan_baru';
+$route['riwayat_transaksi'] = 'kasir/riwayat_transaksi';
+
+// Authentication Routes
+$route['login'] = 'auth/login';
+$route['logout'] = 'auth/logout';

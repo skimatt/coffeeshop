@@ -37,7 +37,7 @@
                 <?php $this->load->view('templates/admin/header'); ?>
                 <div class="content-wrapper">
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <h4 class="py-4 mb-6">Dashboard</h4>
+                        
                         <!-- Stats Cards -->
                         <div class="row g-4 mb-4">
                             <div class="col-md-3 col-sm-6">
