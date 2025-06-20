@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 17 Jun 2025 pada 17.22
+-- Waktu pembuatan: 20 Jun 2025 pada 16.29
 -- Versi server: 10.1.38-MariaDB
 -- Versi PHP: 5.6.40
 
@@ -43,7 +43,11 @@ INSERT INTO `kategori` (`id_kategori`, `nama_kategori`) VALUES
 (3, 'Snack'),
 (4, 'Dessert'),
 (5, 'Paket'),
-(6, 'Makanan');
+(6, 'Kopi'),
+(7, 'Teh'),
+(8, 'Jus'),
+(9, 'Roti'),
+(10, 'Sup');
 
 -- --------------------------------------------------------
 
@@ -64,19 +68,16 @@ CREATE TABLE `menu` (
 --
 
 INSERT INTO `menu` (`id_menu`, `nama_menu`, `harga`, `stok`, `id_kategori`) VALUES
-(1, 'Menu1', '23000.00', 0, 1),
-(2, 'Menu2', '18000.00', 0, 2),
-(3, 'Menu3', '15000.00', 0, 3),
-(4, 'Menu4', '25000.00', 0, 1),
-(5, 'Menu5', '30000.00', 0, 4),
-(6, 'Menu6', '12000.00', 0, 2),
-(7, 'Menu7', '45000.00', 0, 5),
-(8, 'Menu8', '17000.00', 0, 1),
-(9, 'Menu9', '27000.00', 0, 3),
-(10, 'Menu10', '22000.00', 0, 4),
-(36, 'ayam penyet', '25000.00', 124, 6),
-(37, 'capucino', '25000.00', 122, 2),
-(38, 'ayam geprek', '3500.00', 29, 3);
+(1, 'Nasi Goreng', '20000.00', 10, 1),
+(2, 'Es Teh Manis', '8000.00', 20, 7),
+(3, 'Kopi Hitam', '12000.00', 15, 6),
+(4, 'Jus Alpukat', '15000.00', 12, 8),
+(5, 'Burger Mini', '18000.00', 10, 3),
+(6, 'Roti Bakar', '10000.00', 25, 9),
+(7, 'Paket Komplit', '35000.00', 8, 5),
+(8, 'Es Krim Coklat', '12000.00', 14, 4),
+(9, 'Ayam Bakar', '25000.00', 9, 1),
+(10, 'Sup Ayam', '16000.00', 11, 10);
 
 -- --------------------------------------------------------
 
@@ -97,8 +98,16 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id_order`, `tanggal_order`, `total_harga`, `id_user`, `nama_pembeli`) VALUES
-(24, '2025-06-17 17:10:33', '25000.00', 18, 'rahmat mulia'),
-(25, '2025-06-17 17:12:57', '125000.00', 18, 'rahmat mulia');
+(1, '2025-06-20 21:26:42', '20000.00', 2, 'Rahmat'),
+(2, '2025-06-20 21:26:42', '35000.00', 2, 'Nurul'),
+(3, '2025-06-20 21:26:42', '15000.00', 3, 'Ali'),
+(4, '2025-06-20 21:26:42', '8000.00', 4, 'Bima'),
+(5, '2025-06-20 21:26:42', '12000.00', 5, 'Citra'),
+(6, '2025-06-20 21:26:42', '18000.00', 6, 'Dian'),
+(7, '2025-06-20 21:26:42', '10000.00', 7, 'Eko'),
+(8, '2025-06-20 21:26:42', '25000.00', 8, 'Farah'),
+(9, '2025-06-20 21:26:42', '16000.00', 9, 'Gilang'),
+(10, '2025-06-20 21:26:42', '12000.00', 10, 'Hana');
 
 -- --------------------------------------------------------
 
@@ -119,8 +128,16 @@ CREATE TABLE `order_items` (
 --
 
 INSERT INTO `order_items` (`id_item`, `id_order`, `id_menu`, `jumlah`, `subtotal`) VALUES
-(1, 24, 36, 1, '25000.00'),
-(2, 25, 37, 5, '125000.00');
+(1, 1, 1, 1, '20000.00'),
+(2, 2, 7, 1, '35000.00'),
+(3, 3, 4, 1, '15000.00'),
+(4, 4, 2, 1, '8000.00'),
+(5, 5, 3, 1, '12000.00'),
+(6, 6, 5, 1, '18000.00'),
+(7, 7, 6, 1, '10000.00'),
+(8, 8, 9, 1, '25000.00'),
+(9, 9, 10, 1, '16000.00'),
+(10, 10, 8, 1, '12000.00');
 
 -- --------------------------------------------------------
 
@@ -135,6 +152,22 @@ CREATE TABLE `payments` (
   `jumlah_bayar` decimal(10,2) NOT NULL,
   `waktu_bayar` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
+
+--
+-- Dumping data untuk tabel `payments`
+--
+
+INSERT INTO `payments` (`id_payment`, `id_order`, `metode`, `jumlah_bayar`, `waktu_bayar`) VALUES
+(1, 1, 'cash', '20000.00', '2025-06-20 21:26:55'),
+(2, 2, 'qris', '35000.00', '2025-06-20 21:26:55'),
+(3, 3, 'e-wallet', '15000.00', '2025-06-20 21:26:55'),
+(4, 4, 'cash', '8000.00', '2025-06-20 21:26:55'),
+(5, 5, 'qris', '12000.00', '2025-06-20 21:26:55'),
+(6, 6, 'cash', '18000.00', '2025-06-20 21:26:55'),
+(7, 7, 'e-wallet', '10000.00', '2025-06-20 21:26:55'),
+(8, 8, 'cash', '25000.00', '2025-06-20 21:26:55'),
+(9, 9, 'qris', '16000.00', '2025-06-20 21:26:55'),
+(10, 10, 'cash', '12000.00', '2025-06-20 21:26:55');
 
 -- --------------------------------------------------------
 
@@ -156,7 +189,7 @@ CREATE TABLE `pengaturan` (
 --
 
 INSERT INTO `pengaturan` (`id_pengaturan`, `nama_toko`, `alamat`, `logo`, `qris`, `pajak`) VALUES
-(1, 'OmWarri', 'jl.juli,depan masjid agung', NULL, NULL, '0.00');
+(1, 'Coffee Omwari', 'Jl. Kopi No.1', NULL, NULL, '10.00');
 
 -- --------------------------------------------------------
 
@@ -176,16 +209,16 @@ CREATE TABLE `stok_bahan` (
 --
 
 INSERT INTO `stok_bahan` (`id_stok`, `nama_bahan`, `jumlah`, `satuan`) VALUES
-(1, 'Bahan1', '50.00', 'gram'),
-(2, 'Bahan2', '30.00', 'gram'),
-(3, 'Bahan3', '20.00', 'gram'),
-(4, 'Bahan4', '60.00', 'gram'),
-(5, 'Bahan5', '40.00', 'gram'),
-(6, 'Bahan6', '80.00', 'gram'),
-(7, 'Bahan7', '90.00', 'gram'),
-(8, 'Bahan8', '100.00', 'gram'),
-(9, 'Bahan9', '70.00', 'gram'),
-(10, 'Bahan10', '55.00', 'gram');
+(1, 'Biji Kopi', '200.00', 'gram'),
+(2, 'Gula', '1000.00', 'gram'),
+(3, 'Susu', '10.00', 'liter'),
+(4, 'Tepung', '1500.00', 'gram'),
+(5, 'Mentega', '500.00', 'gram'),
+(6, 'Coklat Bubuk', '300.00', 'gram'),
+(7, 'Keju', '200.00', 'gram'),
+(8, 'Roti Tawar', '100.00', 'slice'),
+(9, 'Ayam', '5.00', 'kg'),
+(10, 'Sayur', '3.00', 'kg');
 
 -- --------------------------------------------------------
 
@@ -206,8 +239,16 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_user`, `nama`, `username`, `password`, `role`) VALUES
-(1, 'Admin Omwari', 'admin', '0192023a7bbd73250516f069df18b500', 'admin'),
-(18, 'skimatt', 'kasir12', 'e10adc3949ba59abbe56e057f20f883e', 'kasir');
+(1, 'Admin', 'admin', '0192023a7bbd73250516f069df18b500', 'admin'),
+(2, 'Kasir', 'kasir', 'de28f8f7998f23ab4194b51a6029416f', 'kasir'),
+(3, 'Rina', 'rina', 'e10adc3949ba59abbe56e057f20f883e', 'kasir'),
+(4, 'Budi', 'budi', 'e10adc3949ba59abbe56e057f20f883e', 'kasir'),
+(5, 'Sari', 'sari', 'e10adc3949ba59abbe56e057f20f883e', 'admin'),
+(6, 'Agus', 'agus', 'e10adc3949ba59abbe56e057f20f883e', 'kasir'),
+(7, 'Dina', 'dina', 'e10adc3949ba59abbe56e057f20f883e', 'admin'),
+(8, 'Tono', 'tono', 'e10adc3949ba59abbe56e057f20f883e', 'kasir'),
+(9, 'Lina', 'lina', 'e10adc3949ba59abbe56e057f20f883e', 'kasir'),
+(10, 'Maya', 'maya', 'e10adc3949ba59abbe56e057f20f883e', 'kasir');
 
 --
 -- Indexes for dumped tables
@@ -276,31 +317,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=891;
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `id_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id_item` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_item` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id_payment` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_payment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `pengaturan`
@@ -318,7 +359,7 @@ ALTER TABLE `stok_bahan`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
