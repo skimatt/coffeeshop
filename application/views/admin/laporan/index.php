@@ -71,7 +71,6 @@
                                 <h5 class="card-title">Hasil Laporan</h5>
                                 <div>
                                     <a href="<?php echo site_url('admin/laporan_export/pdf/' . set_value('tanggal_mulai') . '/' . set_value('tanggal_selesai')); ?>" class="btn btn-success">Export PDF</a>
-                                    <a href="<?php echo site_url('admin/laporan_export/excel/' . set_value('tanggal_mulai') . '/' . set_value('tanggal_selesai')); ?>" class="btn btn-info">Export Excel</a>
                                 </div>
                             </div>
                             <div class="card-body">
